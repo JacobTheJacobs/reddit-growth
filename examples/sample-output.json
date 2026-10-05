@@ -1,0 +1,536 @@
+{
+  "schema_version": "2.0",
+  "target": "PM tools for small teams",
+  "window_hours": 168,
+  "generated_at": 1900000000,
+  "subreddits": [
+    "SaaS",
+    "projectmanagement"
+  ],
+  "filters": {
+    "min_score": 0,
+    "min_comments": 0,
+    "intents": null,
+    "max_pages": 10
+  },
+  "competitors": null,
+  "source_status": [
+    {
+      "subreddit": "SaaS",
+      "status": "ok",
+      "source": "fake",
+      "pages": 1,
+      "candidates": 3,
+      "kept": 3,
+      "comment_errors": 0
+    },
+    {
+      "subreddit": "projectmanagement",
+      "status": "ok",
+      "source": "fake",
+      "pages": 1,
+      "candidates": 3,
+      "kept": 2,
+      "comment_errors": 0
+    }
+  ],
+  "posts": [
+    {
+      "id": "a1",
+      "community": "r/SaaS",
+      "title": "Any alternative to Jira? Pricing is too expensive",
+      "selftext": "",
+      "url": "https://www.reddit.com/r/SaaS/comments/a1/x/",
+      "score": 40,
+      "num_comments": 20,
+      "created_utc": 1899996400,
+      "source": "fake",
+      "intent": "alternative_search",
+      "intent_confidence": 0.8,
+      "labels": [
+        {
+          "intent": "alternative_search",
+          "score": 0.8,
+          "matched": "alternative to"
+        }
+      ],
+      "themes": [
+        "pricing",
+        "switching"
+      ],
+      "competitors": [
+        "Jira",
+        "Linear"
+      ],
+      "switches": [
+        {
+          "source": "Jira",
+          "target": "Linear"
+        }
+      ],
+      "signals": {
+        "buying": true,
+        "switching": true,
+        "workaround": false,
+        "budget": true,
+        "promotion": false,
+        "from_comments": false
+      },
+      "comments": [
+        {
+          "id": "c1",
+          "body": "We moved from Jira to Linear last year, would pay $8/seat for anything simpler",
+          "score": 14,
+          "labels": [
+            {
+              "intent": "purchase_intent",
+              "score": 0.85,
+              "matched": "would pay"
+            },
+            {
+              "intent": "switching_story",
+              "score": 0.7,
+              "matched": "moved from"
+            }
+          ],
+          "competitors": [
+            "Jira",
+            "Linear"
+          ],
+          "switches": [
+            {
+              "source": "Jira",
+              "target": "Linear"
+            }
+          ]
+        }
+      ],
+      "comments_scanned": 1,
+      "comment_intents": [
+        "purchase_intent",
+        "switching_story"
+      ]
+    },
+    {
+      "id": "a2",
+      "community": "r/SaaS",
+      "title": "Switched from Jira to Linear, cost was killing us",
+      "selftext": "",
+      "url": "https://www.reddit.com/r/SaaS/comments/a2/x/",
+      "score": 8,
+      "num_comments": 4,
+      "created_utc": 1899640000,
+      "source": "fake",
+      "intent": "switching_story",
+      "intent_confidence": 0.8,
+      "labels": [
+        {
+          "intent": "switching_story",
+          "score": 0.8,
+          "matched": "Switched from"
+        }
+      ],
+      "themes": [
+        "pricing",
+        "switching"
+      ],
+      "competitors": [
+        "Jira",
+        "Linear"
+      ],
+      "switches": [
+        {
+          "source": "Jira",
+          "target": "Linear"
+        }
+      ],
+      "signals": {
+        "buying": false,
+        "switching": true,
+        "workaround": false,
+        "budget": false,
+        "promotion": false,
+        "from_comments": false
+      },
+      "comments": [],
+      "comments_scanned": 0,
+      "comment_intents": []
+    },
+    {
+      "id": "a3",
+      "community": "r/SaaS",
+      "title": "We just launched our standup bot",
+      "selftext": "",
+      "url": "https://www.reddit.com/r/SaaS/comments/a3/x/",
+      "score": 100,
+      "num_comments": 30,
+      "created_utc": 1899996400,
+      "source": "fake",
+      "intent": "promotion",
+      "intent_confidence": 0.8,
+      "labels": [
+        {
+          "intent": "promotion",
+          "score": 0.8,
+          "matched": "We just launched"
+        }
+      ],
+      "themes": [
+        "general"
+      ],
+      "competitors": [],
+      "switches": [],
+      "signals": {
+        "buying": false,
+        "switching": false,
+        "workaround": false,
+        "budget": false,
+        "promotion": true,
+        "from_comments": false
+      },
+      "comments": [],
+      "comments_scanned": 0,
+      "comment_intents": []
+    },
+    {
+      "id": "b1",
+      "community": "r/projectmanagement",
+      "title": "Looking for a cheaper alternative to Jira for a 5 person team",
+      "selftext": "",
+      "url": "https://www.reddit.com/r/projectmanagement/comments/b1/x/",
+      "score": 6,
+      "num_comments": 3,
+      "created_utc": 1899996400,
+      "source": "fake",
+      "intent": "alternative_search",
+      "intent_confidence": 0.95,
+      "labels": [
+        {
+          "intent": "alternative_search",
+          "score": 0.95,
+          "matched": "alternative to"
+        }
+      ],
+      "themes": [
+        "pricing",
+        "switching",
+        "discovery"
+      ],
+      "competitors": [
+        "Jira"
+      ],
+      "switches": [],
+      "signals": {
+        "buying": true,
+        "switching": true,
+        "workaround": false,
+        "budget": false,
+        "promotion": false,
+        "from_comments": false
+      },
+      "comments": [],
+      "comments_scanned": 0,
+      "comment_intents": []
+    },
+    {
+      "id": "b2",
+      "community": "r/projectmanagement",
+      "title": "Our weekly planning is all manually in a spreadsheet",
+      "selftext": "",
+      "url": "https://www.reddit.com/r/projectmanagement/comments/b2/x/",
+      "score": 3,
+      "num_comments": 9,
+      "created_utc": 1899996400,
+      "source": "fake",
+      "intent": "workaround_share",
+      "intent_confidence": 0.8,
+      "labels": [
+        {
+          "intent": "workaround_share",
+          "score": 0.8,
+          "matched": "in a spreadsheet"
+        }
+      ],
+      "themes": [
+        "workflow-friction"
+      ],
+      "competitors": [],
+      "switches": [],
+      "signals": {
+        "buying": false,
+        "switching": false,
+        "workaround": true,
+        "budget": false,
+        "promotion": false,
+        "from_comments": false
+      },
+      "comments": [],
+      "comments_scanned": 0,
+      "comment_intents": []
+    }
+  ],
+  "analysis": {
+    "target": "PM tools for small teams",
+    "post_count": 5,
+    "communities": {
+      "r/SaaS": 3,
+      "r/projectmanagement": 2
+    },
+    "intent_counts": {
+      "alternative_search": 2,
+      "switching_story": 1,
+      "promotion": 1,
+      "workaround_share": 1
+    },
+    "comment_intent_counts": {
+      "purchase_intent": 1,
+      "switching_story": 1
+    },
+    "signal_clusters": [
+      {
+        "theme": "pricing",
+        "score": 6.52,
+        "confidence": "medium",
+        "posts": 3,
+        "demand_threads": 3,
+        "communities": [
+          "r/SaaS",
+          "r/projectmanagement"
+        ],
+        "buying_signals": 2,
+        "switching_signals": 3,
+        "workaround_signals": 0,
+        "promotion_posts": 0,
+        "top_competitors": [
+          "Jira",
+          "Linear"
+        ],
+        "tools_left": [
+          "Jira"
+        ],
+        "evidence": [
+          {
+            "title": "Any alternative to Jira? Pricing is too expensive",
+            "url": "https://www.reddit.com/r/SaaS/comments/a1/x/",
+            "community": "r/SaaS",
+            "intent": "alternative_search",
+            "strength": 3.1902,
+            "signal_from_comments": false
+          },
+          {
+            "title": "Looking for a cheaper alternative to Jira for a 5 person team",
+            "url": "https://www.reddit.com/r/projectmanagement/comments/b1/x/",
+            "community": "r/projectmanagement",
+            "intent": "alternative_search",
+            "strength": 3.0436,
+            "signal_from_comments": false
+          },
+          {
+            "title": "Switched from Jira to Linear, cost was killing us",
+            "url": "https://www.reddit.com/r/SaaS/comments/a2/x/",
+            "community": "r/SaaS",
+            "intent": "switching_story",
+            "strength": 2.458,
+            "signal_from_comments": false
+          }
+        ],
+        "signal_id": "signal_001"
+      },
+      {
+        "theme": "switching",
+        "score": 6.52,
+        "confidence": "medium",
+        "posts": 3,
+        "demand_threads": 3,
+        "communities": [
+          "r/SaaS",
+          "r/projectmanagement"
+        ],
+        "buying_signals": 2,
+        "switching_signals": 3,
+        "workaround_signals": 0,
+        "promotion_posts": 0,
+        "top_competitors": [
+          "Jira",
+          "Linear"
+        ],
+        "tools_left": [
+          "Jira"
+        ],
+        "evidence": [
+          {
+            "title": "Any alternative to Jira? Pricing is too expensive",
+            "url": "https://www.reddit.com/r/SaaS/comments/a1/x/",
+            "community": "r/SaaS",
+            "intent": "alternative_search",
+            "strength": 3.1902,
+            "signal_from_comments": false
+          },
+          {
+            "title": "Looking for a cheaper alternative to Jira for a 5 person team",
+            "url": "https://www.reddit.com/r/projectmanagement/comments/b1/x/",
+            "community": "r/projectmanagement",
+            "intent": "alternative_search",
+            "strength": 3.0436,
+            "signal_from_comments": false
+          },
+          {
+            "title": "Switched from Jira to Linear, cost was killing us",
+            "url": "https://www.reddit.com/r/SaaS/comments/a2/x/",
+            "community": "r/SaaS",
+            "intent": "switching_story",
+            "strength": 2.458,
+            "signal_from_comments": false
+          }
+        ],
+        "signal_id": "signal_002"
+      },
+      {
+        "theme": "workflow-friction",
+        "score": 2.1,
+        "confidence": "low",
+        "posts": 1,
+        "demand_threads": 1,
+        "communities": [
+          "r/projectmanagement"
+        ],
+        "buying_signals": 0,
+        "switching_signals": 0,
+        "workaround_signals": 1,
+        "promotion_posts": 0,
+        "top_competitors": [],
+        "tools_left": [],
+        "evidence": [
+          {
+            "title": "Our weekly planning is all manually in a spreadsheet",
+            "url": "https://www.reddit.com/r/projectmanagement/comments/b2/x/",
+            "community": "r/projectmanagement",
+            "intent": "workaround_share",
+            "strength": 3.318,
+            "signal_from_comments": false
+          }
+        ],
+        "signal_id": "signal_003"
+      },
+      {
+        "theme": "discovery",
+        "score": 1.96,
+        "confidence": "low",
+        "posts": 1,
+        "demand_threads": 1,
+        "communities": [
+          "r/projectmanagement"
+        ],
+        "buying_signals": 1,
+        "switching_signals": 1,
+        "workaround_signals": 0,
+        "promotion_posts": 0,
+        "top_competitors": [
+          "Jira"
+        ],
+        "tools_left": [],
+        "evidence": [
+          {
+            "title": "Looking for a cheaper alternative to Jira for a 5 person team",
+            "url": "https://www.reddit.com/r/projectmanagement/comments/b1/x/",
+            "community": "r/projectmanagement",
+            "intent": "alternative_search",
+            "strength": 3.0436,
+            "signal_from_comments": false
+          }
+        ],
+        "signal_id": "signal_004"
+      },
+      {
+        "theme": "general",
+        "score": 0.55,
+        "confidence": "low",
+        "posts": 1,
+        "demand_threads": 0,
+        "communities": [
+          "r/SaaS"
+        ],
+        "buying_signals": 0,
+        "switching_signals": 0,
+        "workaround_signals": 0,
+        "promotion_posts": 1,
+        "top_competitors": [],
+        "tools_left": [],
+        "evidence": [
+          {
+            "title": "We just launched our standup bot",
+            "url": "https://www.reddit.com/r/SaaS/comments/a3/x/",
+            "community": "r/SaaS",
+            "intent": "promotion",
+            "strength": 1.5956,
+            "signal_from_comments": false
+          }
+        ],
+        "signal_id": "signal_005"
+      }
+    ],
+    "opportunities": [
+      {
+        "theme": "pricing",
+        "signal_id": "signal_001",
+        "score": 6.52,
+        "confidence": "medium",
+        "why_it_matters": {
+          "demand_threads": 3,
+          "community_count": 2,
+          "buying_signals": 2,
+          "switching_signals": 3,
+          "workaround_signals": 0
+        },
+        "next_test": "Ship a pricing/comparison page against Jira, Linear; share it only in threads where it answers the question asked. Success: visitor-to-signup rate above your baseline within 2 weeks. Kill: fewer than 50 visits or no lift."
+      },
+      {
+        "theme": "switching",
+        "signal_id": "signal_002",
+        "score": 6.52,
+        "confidence": "medium",
+        "why_it_matters": {
+          "demand_threads": 3,
+          "community_count": 2,
+          "buying_signals": 2,
+          "switching_signals": 3,
+          "workaround_signals": 0
+        },
+        "next_test": "Build a migration guide or importer from Jira. Success: at least 10 completed imports in 30 days. Kill: guide gets traffic but no imports."
+      }
+    ],
+    "competitors": {
+      "mentions": [
+        {
+          "name": "Jira",
+          "threads": 3
+        },
+        {
+          "name": "Linear",
+          "threads": 2
+        }
+      ],
+      "switches": [
+        {
+          "from": "Jira",
+          "to": "Linear",
+          "count": 2,
+          "evidence": [
+            "https://www.reddit.com/r/SaaS/comments/a1/x/",
+            "https://www.reddit.com/r/SaaS/comments/a2/x/"
+          ]
+        }
+      ],
+      "net_flow": [
+        {
+          "name": "Linear",
+          "net": 2
+        },
+        {
+          "name": "Jira",
+          "net": -2
+        }
+      ]
+    }
+  }
+}

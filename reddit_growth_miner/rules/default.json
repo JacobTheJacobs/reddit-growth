@@ -1,0 +1,62 @@
+{
+  "intents": [
+    {"name": "purchase_intent", "patterns": [
+      "\\bwilling to pay\\b", "\\bworth paying\\b", "\\bhappy to pay\\b", "\\bwould (?:gladly )?pay\\b",
+      "\\bmy budget\\b", "\\bbudget (?:is|of|around)\\b", "\\bunder \\$\\d+", "\\bpay(?:ing)? (?:up to |around |about )?\\$\\d+"
+    ]},
+    {"name": "alternative_search", "patterns": [
+      "\\balternatives? (?:to|for)\\b", "\\breplacement for\\b", "\\banything (?:like|similar to)\\b",
+      "\\blooking for an? (?:cheaper |better |open[- ]source )?alternative\\b"
+    ]},
+    {"name": "switching_story", "patterns": [
+      "\\b(?:switched|switching|migrated|migrating|moved|moving) (?:over |away |back )?from\\b",
+      "\\bcancell?ed (?:my |our )?(?:subscription|plan|account)\\b", "\\bgave up on\\b", "\\bstopped using\\b",
+      "\\breplaced \\S+(?: \\S+)? with\\b", "\\bditched\\b"
+    ]},
+    {"name": "recommendation_request", "patterns": [
+      "\\bany recommendations?\\b", "\\b(?:can|could) (?:you|anyone|someone) recommend\\b",
+      "\\bwhat (?:do|would) (?:you|y'all|people)(?: all| guys)? use\\b",
+      "\\blooking for (?:an? |some )?(?:good )?(?:tool|app|service|software|platform)s?\\b",
+      "\\b(?:best|good) (?:tool|app|software|platform|service)s? for\\b", "\\bany suggestions\\b"
+    ]},
+    {"name": "workaround_share", "patterns": [
+      "\\bworkaround\\b", "\\bmy current setup\\b", "\\bended up (?:using|building|writing)\\b",
+      "\\bcopy(?:ing)?[ -](?:and[ -])?past(?:e|ing)\\b", "\\b(?:in|into|using) (?:a |google )?spreadsheets?\\b",
+      "\\bduct[ -]tape\\b",
+      "\\b(?:i|we) (?:still |currently |just |have to |end up )?(?:do|track|update|enter|copy|manage|maintain|reconcile)(?: \\w+){0,3} manually\\b",
+      "\\bmanually (?:track|updat|copy|copi|enter|maintain|reconcil|export)\\w*\\b"
+    ]},
+    {"name": "complaint", "patterns": [
+      "\\bi hate\\b", "\\bfrustrat\\w*\\b", "\\bannoying\\b", "\\bstruggling\\b",
+      "\\b(?:is|so|too|keeps being) (?:broken|slow|buggy|unreliable)\\b", "\\bdoesn'?t work\\b",
+      "\\bkeeps (?:crashing|failing|breaking)\\b", "\\bridiculous(?:ly)? (?:expensive|priced)\\b"
+    ]},
+    {"name": "help_request", "patterns": [
+      "\\bhow (?:do|can|should) i\\b", "\\bany advice\\b", "\\bwhat should i do\\b",
+      "\\bneed help\\b", "\\bcan (?:someone|anyone) help\\b", "\\bstuck on\\b"
+    ]}
+  ],
+  "promotion": [
+    "\\b(?:i|we) (?:just )?(?:built|made|launched|created|shipped)\\b", "\\bcheck out (?:my|our)\\b",
+    "\\b(?:use|try) (?:my|our) (?:app|tool|product)\\b", "\\bfeedback on (?:my|our)\\b"
+  ],
+  "themes": {
+    "pricing": ["expensive", "cheap", "cheaper", "afford", "affordable", "price", "prices", "pricing", "cost", "costs", "subscription", "budget", "free tier", "overpriced", "per seat"],
+    "switching": ["alternative", "alternatives", "switch", "switched", "switching", "migrate", "migrated", "migration", "replacement", "cancel", "cancelled", "canceled", "moved from", "moving away"],
+    "workflow-friction": ["manual", "manually", "tedious", "spreadsheet", "spreadsheets", "copy paste", "copy-paste", "workflow", "integrate", "integration", "integrations", "api", "zapier"],
+    "reliability": ["broken", "bug", "bugs", "buggy", "doesn't work", "unreliable", "downtime", "outage", "crash", "crashes", "slow"],
+    "discovery": ["recommend", "recommendation", "recommendations", "looking for", "suggestion", "suggestions", "what do you use", "best tool", "which tool"],
+    "learning": ["beginner", "tutorial", "learn", "learning", "confused", "how do i", "documentation", "docs"],
+    "distribution": ["seo", "traffic", "reach", "views", "followers", "leads", "customers", "growth", "marketing"]
+  },
+  "next_tests": {
+    "pricing": "Ship a pricing/comparison page against {competitors}; share it only in threads where it answers the question asked. Success: visitor-to-signup rate above your baseline within 2 weeks. Kill: fewer than 50 visits or no lift.",
+    "switching": "Build a migration guide or importer from {leaving}. Success: at least 10 completed imports in 30 days. Kill: guide gets traffic but no imports.",
+    "workflow-friction": "Prototype the manual step people describe (spreadsheet/copy-paste) as a template or integration. Success: 5 people from the target communities use it twice in a week. Kill: one-time use only.",
+    "reliability": "Publish an honest reliability comparison with {competitors} (uptime, failure modes). Success: inbound mentions or signups citing reliability. Kill: no measurable change in 3 weeks.",
+    "discovery": "Write the answer the threads are asking for (a buyer's guide that includes {competitors}). Success: ranking or referral traffic converting above baseline. Kill: no conversions after 500 visits.",
+    "learning": "Publish one tutorial addressing the most repeated blocker. Success: tutorial-to-signup conversion above baseline. Kill: under 1% conversion after 1,000 views.",
+    "distribution": "Interview 5 posters about how they get customers today before building anything. Success: 3 of 5 describe the same unmet need. Kill: no shared need.",
+    "default": "Read the linked threads, name the repeated job-to-be-done, and test one helpful, non-spam intervention against a clear conversion event and a kill date."
+  }
+}
