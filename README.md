@@ -4,7 +4,6 @@
 
 **Find out what people on Reddit want to buy, switch away from, or hack together themselves. Every finding links back to the thread.**
 
-[![Tests](https://github.com/JacobTheJacobs/reddit-growth/actions/workflows/tests.yml/badge.svg)](https://github.com/JacobTheJacobs/reddit-growth/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
 ![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
