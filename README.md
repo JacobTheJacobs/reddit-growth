@@ -1,200 +1,126 @@
+<div align="center">
+
 # Reddit Growth Miner
 
-**Reddit Growth Miner by JacobTheJacobs** · [GitHub](https://github.com/JacobTheJacobs/reddit-growth)
+**Find out what people on Reddit want to buy, switch away from, or hack together themselves. Every finding links back to the thread.**
 
-**Mine public Reddit discussions for buying signals, switching intent, competitor gaps, recurring workarounds, and growth opportunities.**
+[![Tests](https://github.com/JacobTheJacobs/reddit-growth/actions/workflows/tests.yml/badge.svg)](https://github.com/JacobTheJacobs/reddit-growth/actions/workflows/tests.yml)
+![Python](https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white)
+![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-Reddit Growth Miner is an evidence-first Reddit reconnaissance CLI built by JacobTheJacobs. Give it a target market and a subreddit set. It collects public posts, labels intent with transparent rules, groups repeated signals, and emits a source-linked report you can inspect before making a growth claim.
+</div>
 
-It is intentionally not an auto-reply bot and it does not pretend that correlation is causation.
+---
+
+## What it does
+
+Give it a market and a few subreddits. It reads recent public posts and comments, then tells you:
+
+- 🛒 **Who wants to buy:** "willing to pay", "budget is $50", "any recommendations?"
+- 🔀 **Who is switching:** "switched from Jira to Linear", "alternative to Notion?"
+- 🩹 **Who is hacking around a problem:** spreadsheets, copy-paste, manual steps
+- 📊 **Which themes repeat** across threads and communities, ranked, with a cheap experiment to test each one
+
+It only reads. It never posts, messages, or votes.
 
 ## Quick start
 
-Requirements: Python 3.10+. No third-party dependencies.
-
 ```bash
-pip install -e .            # optional: installs the `reddit-growth-miner` command
+git clone https://github.com/JacobTheJacobs/reddit-growth.git
+cd reddit-growth
 
-python3 scripts/reddit_growth_miner.py plan \
-  --target "AI coding tools"
-```
-
-Run a scan:
-
-```bash
+# 1. Scan
 python3 scripts/reddit_growth_miner.py scan \
-  --target "AI coding tools" \
-  --subs LocalLLaMA,ClaudeAI,ChatGPTCoding,SideProject \
-  --hours 168 \
-  --min-score 5 \
-  --min-comments 3 \
-  --competitors "Cursor,Copilot=GitHub Copilot,Windsurf,Claude Code" \
+  --target "project management tools" \
+  --subs projectmanagement,SaaS,agile \
+  --competitors "Jira,Linear,Asana,Trello" \
   --fetch-comments \
-  --out results.json
+  --out scan.json
+
+# 2. Read the report
+python3 scripts/reddit_growth_miner.py report --input scan.json --out report.md
 ```
 
-Render a readable report:
+Python 3.10+, nothing to install. Or run `pip install .` to get a `reddit-growth-miner` command.
 
-```bash
-python3 scripts/reddit_growth_miner.py report \
-  --input results.json \
-  --out report.md
-```
-
-## What it looks for
-
-The scanner labels observable discussion intent:
-
-- `alternative_search` — looking for a replacement
-- `recommendation_request` — asking what to use
-- `purchase_intent` — explicit budget or willingness to pay
-- `switching_story` — leaving a current tool
-- `workaround_share` — manual/spreadsheet workaround
-- `complaint` — recurring friction or failure
-- `help_request` — blocked user trying to solve a problem
-- `promotion` — promotional posts, kept separate from demand evidence
-
-Labels are multi-label: "Notion is so slow, any alternative?" is both a `complaint` and an `alternative_search`. Promotion is a separate flag, so a promotional post never counts as demand, but replies to it still can.
-
-With `--fetch-comments`, comments are classified with the same rules. A thread counts as demand evidence if the post *or* its replies carry a buying, switching or workaround signal; the report marks evidence found only in comments.
-
-Posts are grouped into themes (pricing, switching, workflow friction, reliability, discovery, learning, distribution) by whole-word matching.
-
-## Competitor landscape
-
-Pass the tools you care about with `--competitors`. Aliases go after `=`, separated by `|`:
-
-```bash
---competitors "Jira,Linear=linear.app|Linear App,Asana,Monday=monday.com"
-```
-
-The scan then reports how many threads mention each tool, every observed "switched from A to B" statement with links, and the net flow per tool. Without `--competitors`, only names that appear in comparison language ("alternative to X", "switched from X to Y", "X vs Y") are reported.
-
-## Scoring
-
-Clusters are ranked by a score that combines:
-
-- **demand threads**: posts with a buying, switching or workaround signal (in the post or its comments)
-- **breadth**: distinct subreddits
-- **recency** within the scan window
-- **relative engagement**: each post's score + 2×comments divided by the median for its own subreddit in the sample, so small communities are not drowned out by large ones
-
-A theme becomes an opportunity only with at least two demand threads. Each opportunity carries a `low` / `medium` / `high` confidence band and a theme-specific next test with a success metric and kill condition, filled in with the tools people mention or leave.
-
-## Example growth-research workflow
-
-1. Start with a target: `"B2B teams using AI SDR tools"`.
-2. Pick 3–8 relevant subreddits.
-3. Scan a 7–14 day window.
-4. Read the linked evidence in the strongest clusters.
-5. Separate real demand from self-promotion and one-off complaints.
-6. Form one falsifiable growth hypothesis.
-7. Test it manually before automating anything.
-
-The tool stops at evidence gathering. It does not auto-post or auto-message users.
-
-## CLI
-
-### Suggest subreddits
-
-```bash
-python3 scripts/reddit_growth_miner.py plan --target "SaaS founders"
-```
-
-### Scan only high-intent posts
-
-```bash
-python3 scripts/reddit_growth_miner.py scan \
-  --target "SaaS founders looking for outbound tools" \
-  --subs SaaS,startups,sales,Entrepreneur \
-  --intents alternative_search,recommendation_request,purchase_intent,switching_story \
-  --hours 336 \
-  --out outbound-signals.json
-```
-
-### Use a custom rule pack
-
-Copy `reddit_growth_miner/rules/default.json`, tune the intent regexes, theme terms or next-test templates for your market, and pass it in:
-
-```bash
-python3 scripts/reddit_growth_miner.py scan --target "..." --subs ... --rules my-rules.json
-```
-
-### Diagnose sources
-
-```bash
-python3 scripts/reddit_growth_miner.py diagnose
-```
-
-Reddit Growth Miner reads public Reddit archives (Arctic Shift, falling back to PullPush). It pages back through each subreddit until the scan window is covered or `--max-pages` (default 10 × 100 posts) runs out; a subreddit that ran out of pages is reported as `truncated` rather than silently cut short. A source that answers 403 or 429 is not contacted again for the rest of the run. It does not rotate proxies or bypass access controls.
-
-`scan` exits with code 2 if every subreddit failed.
-
-## Output
-
-A scan JSON (`schema_version` 2.0) contains:
-
-```json
-{
-  "schema_version": "2.0",
-  "target": "AI coding tools",
-  "subreddits": ["LocalLLaMA", "ClaudeAI"],
-  "source_status": [{"subreddit": "LocalLLaMA", "status": "ok", "pages": 4, "kept": 31}],
-  "posts": [{"intent": "alternative_search", "labels": [], "signals": {}, "competitors": [], "switches": [], "comments": []}],
-  "analysis": {
-    "intent_counts": {},
-    "comment_intent_counts": {},
-    "signal_clusters": [],
-    "opportunities": [],
-    "competitors": {"mentions": [], "switches": [], "net_flow": []}
-  }
-}
-```
-
-Each evidence item retains its Reddit URL so you can audit the result manually. See `examples/sample-output.json` and `examples/sample-report.md`.
-
-`report --format json` re-emits the scan; `--format md` (default) renders Markdown.
-
-## Agent skill
-
-`SKILL.md` turns the CLI into a compact workflow for coding agents. The agent is instructed to gather evidence first, then form hypotheses from the linked threads instead of inventing demand.
-
-## Project layout
+## What you get
 
 ```text
-reddit_growth_miner/
-├── domain/models.py      # frozen dataclasses: Post, Comment, Label, Signals, Switch, FetchResult
-├── http.py               # HttpClient: per-host pacing, bounded retries, circuit breaker
-├── sources/              # Source protocol + Arctic Shift / PullPush adapters
-│   ├── base.py           #   paginate(): walk back with `before` cursors to the window start
-│   └── composite.py      #   FallbackSource (try in order), CachedSource (memoise)
-├── rules/default.json    # rule pack: intent regexes, promotion, theme terms, next-test templates
-├── classify/             # Classifier protocol + RuleClassifier (multi-label)
-├── analysis/
-│   ├── entities.py       # competitor mentions and switch extraction
-│   ├── enrich.py         # labels posts and comments, merges thread-level signals
-│   ├── scoring.py        # relative engagement, recency, cluster score, confidence
-│   └── clustering.py     # theme clusters, opportunities, competitor landscape
-├── filters.py            # composable predicates: MinScore(5) & MinComments(3) & HasIntent(...)
-├── config.py             # ScanConfig
-├── pipeline.py           # ScanPipeline: collect → filter → enrich → comments → analyze
-├── render/               # Markdown and JSON renderers
-├── planner.py            # subreddit suggestions
-└── cli.py                # thin argparse layer
+## Candidate growth opportunities
+### switching — score 6.52 (medium confidence)
+- Demand threads: 3 across 2 communities
+- Next test: Build a migration guide or importer from Jira.
+  Success: 10 completed imports in 30 days. Kill: traffic but no imports.
+
+## Competitor landscape
+| Tool   | Threads mentioning |
+| Jira   | 3 |
+| Linear | 2 |
+- Jira → Linear ×2  [1] [2]
 ```
 
-Every stage depends on a protocol, not a concrete class, so a different source (e.g. Reddit's official API) or classifier (e.g. an LLM) can be swapped in without touching the pipeline. Tests use an in-memory `FakeSource`.
+Full example: [`examples/sample-report.md`](examples/sample-report.md) · raw JSON: [`examples/sample-output.json`](examples/sample-output.json)
 
-Run tests: `python3 -m unittest discover -s tests -t tests`
+## Commands
 
-## Safety / data handling
+| Command | What it does |
+|---|---|
+| `plan --target "..."` | Suggest subreddits for a market |
+| `scan --target "..." --subs a,b,c` | Collect and analyse posts → JSON |
+| `report --input scan.json` | Turn a scan into a Markdown report |
+| `diagnose` | Check the data sources are reachable |
 
-- Public Reddit content only.
-- No login bypass, proxy rotation, or anti-bot evasion.
-- No automated replies or unsolicited messaging.
-- No author profiling; the output is about discussion signals, not people.
-- Treat a cluster as evidence worth reading, not proof that a market exists.
+### Useful `scan` options
+
+| Option | Default | Meaning |
+|---|---|---|
+| `--hours` | `168` | How far back to look |
+| `--competitors` | — | Tools to track, with optional aliases: `"Linear=linear.app\|Linear App,Jira"` |
+| `--fetch-comments` | off | Also analyse replies, often where the best evidence is |
+| `--intents` | all | Keep only some signals, e.g. `alternative_search,purchase_intent` |
+| `--min-score` / `--min-comments` | `5` / `3` | Skip low-engagement posts |
+| `--max-pages` | `10` | Up to 100 posts per page per subreddit |
+| `--rules` | built-in | Your own rule file (copy [`rules/default.json`](reddit_growth_miner/rules/default.json)) |
+
+## How it works
+
+```mermaid
+flowchart LR
+  A[Public Reddit archive] --> B[Filter by time and engagement]
+  B --> C[Label intent<br/>posts + comments]
+  C --> D[Group by theme]
+  D --> E[Score and rank]
+  E --> F[Report with links]
+```
+
+- **Labels** are plain regex rules you can read and edit. A post can have several labels. Promotional posts never count as demand.
+- **Scores** reward repeated demand across different subreddits and recent threads. Engagement is compared within each subreddit, so small communities aren't drowned out by large ones.
+- **Confidence** (`low` / `medium` / `high`) tells you how hard you can lean on a theme. `low` means "worth reading", not "a market".
+
+Data comes from the [Arctic Shift](https://arctic-shift.photon-reddit.com) archive, with [PullPush](https://pullpush.io) as a fallback. If a source blocks or rate-limits, the tool stops using it and says so in the report.
+
+## Ground rules
+
+- ✅ Public posts only. Author names are dropped.
+- ✅ Every claim keeps its Reddit link so you can check it.
+- ❌ No auto-posting, DMs, fake accounts or vote manipulation.
+- ❌ No proxy rotation or getting around blocks.
+
+A cluster is evidence worth reading, not proof that a market exists.
+
+## Use it with an AI agent
+
+[`SKILL.md`](SKILL.md) turns this into an agent skill: gather evidence, read the threads, then propose one small experiment with a success metric and a kill condition.
+
+## Development
+
+```bash
+python3 -m unittest discover -s tests -t tests
+```
+
+The code is split into swappable parts (data source, classifier, renderer), each behind a small interface. See [`reddit_growth_miner/`](reddit_growth_miner/).
 
 ## License
 
-MIT. See `LICENSE`.
+[MIT](LICENSE) © JacobTheJacobs
